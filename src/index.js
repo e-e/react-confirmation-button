@@ -8,6 +8,7 @@ class ConfirmButton extends Component {
     this.state = {
       clicked: false
     };
+    this.onConfirm = this.onConfirm.bind(this);
   }
   renderButton() {
     if (this.state.clicked) return null;
@@ -20,8 +21,8 @@ class ConfirmButton extends Component {
       </div>
     );
   }
-  renderConfirm() {
-    const onConfirm =
+  onConfirm() {
+    const confirm =
       typeof this.props.onConfirm === 'function'
         ? this.props.onConfirm
         : () => {
@@ -29,12 +30,16 @@ class ConfirmButton extends Component {
               "[react-confirmation-button]: You must provide an 'onConfirm' function."
             );
           };
+    confirm();
+    this.setState({ clicked: false });
+  }
+  renderConfirm() {
     if (!this.state.clicked) return null;
     return (
       <div className={styles.wrap}>
         <div
           className={`${styles.button} ${styles.confirm}`}
-          onClick={onConfirm}
+          onClick={this.onConfirm}
         >
           {this.props.confirmText || 'Confirm'}
         </div>

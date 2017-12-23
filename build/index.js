@@ -106,6 +106,7 @@ var ConfirmButton = function (_Component) {
     _this.state = {
       clicked: false
     };
+    _this.onConfirm = _this.onConfirm.bind(_this);
     return _this;
   }
 
@@ -127,13 +128,19 @@ var ConfirmButton = function (_Component) {
       );
     }
   }, {
+    key: 'onConfirm',
+    value: function onConfirm() {
+      var confirm = typeof this.props.onConfirm === 'function' ? this.props.onConfirm : function () {
+        throw new Error("[react-confirmation-button]: You must provide an 'onConfirm' function.");
+      };
+      confirm();
+      this.setState({ clicked: false });
+    }
+  }, {
     key: 'renderConfirm',
     value: function renderConfirm() {
       var _this3 = this;
 
-      var onConfirm = typeof this.props.onConfirm === 'function' ? this.props.onConfirm : function () {
-        throw new Error("[react-confirmation-button]: You must provide an 'onConfirm' function.");
-      };
       if (!this.state.clicked) return null;
       return _react2.default.createElement(
         'div',
@@ -142,7 +149,7 @@ var ConfirmButton = function (_Component) {
           'div',
           {
             className: _button2.default.button + ' ' + _button2.default.confirm,
-            onClick: onConfirm
+            onClick: this.onConfirm
           },
           this.props.confirmText || 'Confirm'
         ),
