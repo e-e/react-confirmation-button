@@ -1,6 +1,6 @@
 {
   "name": "react-confirmation-button",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Confirmation button functionality",
   "main": "build/index.js",
   "scripts": {
