@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './styles/button.css';
+import styles from './styles/button.css';
+console.log('styles: ', styles);
 
 class ConfirmButton extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class ConfirmButton extends Component {
     if (this.state.clicked) return null;
     return (
       <div
-        className="confirm-button-button confirm-button-main"
+        className={`${styles.button} ${styles.main}`}
         onClick={() => this.setState({ clicked: true })}
       >
         {this.props.buttonText || 'Save'}
@@ -20,17 +21,25 @@ class ConfirmButton extends Component {
     );
   }
   renderConfirm() {
+    const onConfirm =
+      typeof this.props.onConfirm === 'function'
+        ? this.props.onConfirm
+        : () => {
+            throw new Error(
+              "[react-confirmation-button]: You must provide an 'onConfirm' function."
+            );
+          };
     if (!this.state.clicked) return null;
     return (
-      <div className="confirm-button-confirm-wrap">
+      <div className={styles.wrap}>
         <div
-          className="confirm-button-button confirm-button-confirm"
-          onClick={this}
+          className={`${styles.button} ${styles.confirm}`}
+          onClick={onConfirm}
         >
           {this.props.confirmText || 'Confirm'}
         </div>
         <div
-          className="confirm-button-button confirm-button-cancel"
+          className={`${styles.button} ${styles.cancel}`}
           onClick={() => this.setState({ clicked: false })}
         >
           {this.props.cancelText || 'Cancel'}
@@ -40,7 +49,7 @@ class ConfirmButton extends Component {
   }
   render() {
     return (
-      <div className="confirm-button">
+      <div className={styles.all}>
         {this.renderButton()}
         {this.renderConfirm()}
       </div>

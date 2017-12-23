@@ -1,11 +1,11 @@
-.confirm-button {
+:local(.all) {
   display: flex;
   border: 1px solid #cc4b37;
   justify-content: center;
   align-items: center;
 }
 
-.confirm-button-button {
+:local(.button) {
   box-sizing: border-box;
   padding: 5px 15px;
   flex: 1;
@@ -14,25 +14,25 @@
   align-items: center;
   cursor: pointer;
 }
-.confirm-button-button:hover {
+:local(.button:hover) {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
-.confirm-button-main {
+:local(.main) {
   color: #cc4b37;
 }
 
-.confirm-button-confirm-wrap {
+:local(.wrap) {
   display: flex;
   flex-direction: row;
 }
 
-.confirm-button-confirm {
+:local(.confirm) {
   color: #cc4b37;
   padding: 5px 5px;
 }
 
-.confirm-button-cancel {
+:local(.cancel) {
   color: gray;
   padding: 5px 5px;
 }
