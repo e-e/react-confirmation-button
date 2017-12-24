@@ -104,65 +104,98 @@ var ConfirmButton = function (_Component) {
     var _this = _possibleConstructorReturn(this, (ConfirmButton.__proto__ || Object.getPrototypeOf(ConfirmButton)).call(this, props));
 
     _this.state = {
+      confirming: false,
       clicked: false
     };
+
+    _this.buttonClassname = _button2.default.button + ' ' + _button2.default.main;
+    _this.confirmClassname = _button2.default.button + ' ' + _button2.default.confirm;
+    _this.cancelClassname = _button2.default.button + ' ' + _button2.default.cancel;
+    _this.loadingClassname = _button2.default.button + ' ' + _button2.default.cancel;
+    if (typeof _this.props.buttonClass === 'string' && _this.props.buttonClass.trim().length) {
+      _this.buttonClassname = _this.buttonClassname + ' ' + _this.props.buttonClass;
+    }
+    if (typeof _this.props.confirmClass === 'string' && _this.props.confirmClass.trim().length) {
+      _this.confirmClassname = _this.confirmClassname + ' ' + _this.props.confirmClass;
+    }
+    if (typeof _this.props.cancelClass === 'string' && _this.props.cancelClass.trim().length) {
+      _this.cancelClassname = _this.cancelClassname + ' ' + _this.props.cancelClass;
+    }
+    if (typeof _this.props.loadingClass === 'string' && _this.props.loadingClass.trim().length) {
+      _this.loadingClassname = _this.loadingClassname + ' ' + _this.props.loadingClass;
+    }
+
     _this.onConfirm = _this.onConfirm.bind(_this);
+    _this.onCancel = _this.onCancel.bind(_this);
     return _this;
   }
 
   _createClass(ConfirmButton, [{
-    key: 'renderButton',
-    value: function renderButton() {
-      var _this2 = this;
-
-      if (this.state.clicked) return null;
-      return _react2.default.createElement(
-        'div',
-        {
-          className: _button2.default.button + ' ' + _button2.default.main,
-          onClick: function onClick() {
-            return _this2.setState({ clicked: true });
-          }
-        },
-        this.props.buttonText || 'Save'
-      );
-    }
-  }, {
     key: 'onConfirm',
     value: function onConfirm() {
       var confirm = typeof this.props.onConfirm === 'function' ? this.props.onConfirm : function () {
         throw new Error("[react-confirmation-button]: You must provide an 'onConfirm' function.");
       };
       confirm();
-      this.setState({ clicked: false });
+      this.setState({ confirming: false, clicked: true });
+    }
+  }, {
+    key: 'onCancel',
+    value: function onCancel() {
+      var cancel = typeof this.props.onCancel === 'function' ? this.props.onCancel : function () {};
+      cancel();
+      this.setState({ confirming: false });
+    }
+  }, {
+    key: 'renderButton',
+    value: function renderButton() {
+      var _this2 = this;
+
+      if (!!this.props.once && this.state.clicked) return null;
+      if (this.state.confirming) return null;
+
+      return _react2.default.createElement(
+        'button',
+        {
+          className: this.buttonClassname,
+          onClick: function onClick() {
+            return _this2.setState({ confirming: true });
+          }
+        },
+        this.props.buttonText || 'Save'
+      );
     }
   }, {
     key: 'renderConfirm',
     value: function renderConfirm() {
-      var _this3 = this;
+      if (!!this.props.once && this.state.clicked) return null;
+      if (!this.state.confirming) return null;
 
-      if (!this.state.clicked) return null;
       return _react2.default.createElement(
         'div',
         { className: _button2.default.wrap },
         _react2.default.createElement(
-          'div',
-          {
-            className: _button2.default.button + ' ' + _button2.default.confirm,
-            onClick: this.onConfirm
-          },
+          'button',
+          { className: this.confirmClassname, onClick: this.onConfirm },
           this.props.confirmText || 'Confirm'
         ),
         _react2.default.createElement(
-          'div',
-          {
-            className: _button2.default.button + ' ' + _button2.default.cancel,
-            onClick: function onClick() {
-              return _this3.setState({ clicked: false });
-            }
-          },
+          'button',
+          { className: this.cancelClassname, onClick: this.onCancel },
           this.props.cancelText || 'Cancel'
         )
+      );
+    }
+  }, {
+    key: 'renderDisabled',
+    value: function renderDisabled() {
+      if (!(this.state.clicked && !!this.props.once)) {
+        return null;
+      }
+      return _react2.default.createElement(
+        'button',
+        { className: _button2.default.button + ' ' + _button2.default.main, disabled: true },
+        this.props.loadingText || 'Loading'
       );
     }
   }, {
@@ -172,7 +205,8 @@ var ConfirmButton = function (_Component) {
         'div',
         { className: _button2.default.all },
         this.renderButton(),
-        this.renderConfirm()
+        this.renderConfirm(),
+        this.renderDisabled()
       );
     }
   }]);
@@ -228,16 +262,16 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, ".src-styles-button__all--2jZ_R {\n  display: flex;\n  border: 1px solid #cc4b37;\n  justify-content: center;\n  align-items: center;\n}\n\n.src-styles-button__button--2CSMu {\n  box-sizing: border-box;\n  padding: 5px 15px;\n  flex: 1;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  cursor: pointer;\n}\n.src-styles-button__button--2CSMu:hover {\n  background-color: rgba(255, 255, 255, 0.5);\n}\n\n.src-styles-button__main--3gB2R {\n  color: #cc4b37;\n}\n\n.src-styles-button__wrap--1E4p6 {\n  display: flex;\n  flex-direction: row;\n}\n\n.src-styles-button__confirm--y64Z2 {\n  color: #cc4b37;\n  padding: 5px 5px;\n}\n\n.src-styles-button__cancel--AgXcc {\n  color: gray;\n  padding: 5px 5px;\n}\n", ""]);
+exports.push([module.i, ".src-styles-button__all--2po4D {\r\n  /* display: flex; */\r\n  /* border: 1px solid #cc4b37; */\r\n  /* justify-content: center;\r\n  align-items: center; */\r\n}\r\n\r\n.src-styles-button__button--2fWRm {\r\n  /* box-sizing: border-box; */\r\n  /* padding: 5px 15px; */\r\n  /* flex: 1; */\r\n  /* display: flex; */\r\n  /* justify-content: center;\r\n  align-items: center;\r\n  cursor: pointer; */\r\n}\r\n.src-styles-button__button--2fWRm:hover {\r\n  /* background-color: rgba(255, 255, 255, 0.5); */\r\n}\r\n\r\n.src-styles-button__main--1qq05 {\r\n  /* color: #cc4b37; */\r\n}\r\n\r\n.src-styles-button__wrap--3XA0N {\r\n  /* display: flex;\r\n  flex-direction: row; */\r\n}\r\n\r\n.src-styles-button__confirm--1N8uC {\r\n  /* color: #cc4b37; */\r\n  /* padding: 5px 5px; */\r\n}\r\n\r\n.src-styles-button__cancel--1bWGw {\r\n  /* color: gray; */\r\n  /* padding: 5px 5px; */\r\n}\r\n", ""]);
 
 // exports
 exports.locals = {
-	"all": "src-styles-button__all--2jZ_R",
-	"button": "src-styles-button__button--2CSMu",
-	"main": "src-styles-button__main--3gB2R",
-	"wrap": "src-styles-button__wrap--1E4p6",
-	"confirm": "src-styles-button__confirm--y64Z2",
-	"cancel": "src-styles-button__cancel--AgXcc"
+	"all": "src-styles-button__all--2po4D",
+	"button": "src-styles-button__button--2fWRm",
+	"main": "src-styles-button__main--1qq05",
+	"wrap": "src-styles-button__wrap--3XA0N",
+	"confirm": "src-styles-button__confirm--1N8uC",
+	"cancel": "src-styles-button__cancel--1bWGw"
 };
 
 /***/ }),

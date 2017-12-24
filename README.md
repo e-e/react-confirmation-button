@@ -10,18 +10,37 @@ npm install react-confirmation-button
 ```jsx
 import ConfirmButton from 'react-confirmation-button';
 
-...
+/* ... */
 
-<ConfirmButton onConfirm={() => action()} />
+<ConfirmButton
+  onConfirm={() => action()}
+  onCancel={() => cancelAction()}
+  buttonText="Main button text"
+  confirmText="Confirm button text"
+  cancelText="Cancel button text"
+  loadingText="Loading button text (if `once` is set)"
+  buttonClass=""
+  confirmClass=""
+  cancelClass=""
+  loadingClass=""
+  once
+/>;
 ```
 
-**optional props**
+**optional props (with their default values)**
 
 ```js
 {
+   onCancel={() => {}}
    confirmText: 'Confirm',
    cancelText: 'Cancel',
-   buttonText: 'Save'
+   buttonText: 'Save',
+   loadingText: 'Loading'
+   buttonClass: '',
+   confirmClass: '',
+   cancelClass: '',
+   loadingClass: '',
+   once: true
 }
 ```
 
