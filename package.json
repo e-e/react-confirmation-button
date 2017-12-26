@@ -12,7 +12,11 @@
     "type": "git",
     "url": "git+https://github.com/e-e/react-confirmation-button.git"
   },
-  "keywords": ["React", "Confirmation", "Button"],
+  "keywords": [
+    "React",
+    "Confirmation",
+    "Button"
+  ],
   "author": {
     "name": "Eric Ellingson",
     "email": "god@eric.wtf"
@@ -29,15 +33,10 @@
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-preset-env": "^1.6.1"
+    "babel-preset-env": "^1.6.1",
+    "webpack": "^3.10.0"
   },
   "dependencies": {
-    "css-loader": "^0.28.7",
-    "postcss": "^6.0.14",
-    "postcss-flexbugs-fixes": "^3.2.0",
-    "postcss-loader": "^2.0.9",
-    "react": "^16.2.0",
-    "style-loader": "^0.19.1",
-    "webpack": "^3.10.0"
+    "react": "^16.2.0"
   }
 }

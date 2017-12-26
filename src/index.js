@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import styles from './styles/button.css';
-console.log('styles: ', styles);
 
 class ConfirmButton extends Component {
   constructor(props) {
@@ -10,10 +8,12 @@ class ConfirmButton extends Component {
       clicked: false
     };
 
-    this.buttonClassname = `${styles.button} ${styles.main}`;
-    this.confirmClassname = `${styles.button} ${styles.confirm}`;
-    this.cancelClassname = `${styles.button} ${styles.cancel}`;
-    this.loadingClassname = `${styles.button} ${styles.cancel}`;
+    this.wrapAllClassname = '';
+    this.buttonWrapClassname = '';
+    this.buttonClassname = '';
+    this.confirmClassname = '';
+    this.cancelClassname = '';
+    this.loadingClassname = '';
     if (
       typeof this.props.buttonClass === 'string' &&
       this.props.buttonClass.trim().length
@@ -88,7 +88,7 @@ class ConfirmButton extends Component {
     if (!this.state.confirming) return null;
 
     return (
-      <div className={styles.wrap}>
+      <div className={this.buttonWrapClassname}>
         <button className={this.confirmClassname} onClick={this.onConfirm}>
           {this.props.confirmText || 'Confirm'}
         </button>
@@ -104,14 +104,14 @@ class ConfirmButton extends Component {
       return null;
     }
     return (
-      <button className={`${styles.button} ${styles.main}`} disabled>
+      <button className={`${this.buttonClassname}`} disabled>
         {this.props.loadingText || 'Loading'}
       </button>
     );
   }
   render() {
     return (
-      <div className={styles.all}>
+      <div className={this.wrapAllClassname}>
         {this.renderButton()}
         {this.renderConfirm()}
         {this.renderDisabled()}
