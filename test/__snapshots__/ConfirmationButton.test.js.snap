@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className=""
+>
+  <button
+    className=""
+    onClick={[Function]}
+  >
+    Save
+  </button>
+</div>
+`;
+
+exports[`renders correctly after clicking confirm 1`] = `
+<div
+  className=""
+>
+  <div
+    className=""
+  >
+    <button
+      className=""
+      onClick={[Function]}
+    >
+      Confirm
+    </button>
+    <button
+      className=""
+      onClick={[Function]}
+    >
+      Cancel
+    </button>
+  </div>
+</div>
+`;

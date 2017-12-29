@@ -122,11 +122,15 @@ var ConfirmButton = function (_Component) {
     }
 
     _this.onConfirm = _this.onConfirm.bind(_this);
+    _this.onConfirmClicked = _this.onConfirmClicked.bind(_this);
     _this.onCancel = _this.onCancel.bind(_this);
     return _this;
   }
 
   _createClass(ConfirmButton, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {}
+  }, {
     key: 'onConfirm',
     value: function onConfirm() {
       var confirm = typeof this.props.onConfirm === 'function' ? this.props.onConfirm : function () {
@@ -143,21 +147,19 @@ var ConfirmButton = function (_Component) {
       this.setState({ confirming: false });
     }
   }, {
+    key: 'onConfirmClicked',
+    value: function onConfirmClicked() {
+      this.setState({ confirming: true });
+    }
+  }, {
     key: 'renderButton',
     value: function renderButton() {
-      var _this2 = this;
-
       if (!!this.props.once && this.state.clicked) return null;
       if (this.state.confirming) return null;
 
       return _react2.default.createElement(
         'button',
-        {
-          className: this.buttonClassname,
-          onClick: function onClick() {
-            return _this2.setState({ confirming: true });
-          }
-        },
+        { className: this.buttonClassname, onClick: this.onConfirmClicked },
         this.props.buttonText || 'Save'
       );
     }

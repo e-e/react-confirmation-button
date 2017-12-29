@@ -4,7 +4,7 @@
   "description": "Confirmation button functionality",
   "main": "build/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "webpack --watch",
     "build": "webpack"
   },
@@ -12,7 +12,11 @@
     "type": "git",
     "url": "git+https://github.com/e-e/react-confirmation-button.git"
   },
-  "keywords": ["React", "Confirmation", "Button"],
+  "keywords": [
+    "React",
+    "Confirmation",
+    "Button"
+  ],
   "author": {
     "name": "Eric Ellingson",
     "email": "god@eric.wtf"
@@ -30,6 +34,8 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.6.1",
+    "jest": "^22.0.4",
+    "react-test-renderer": "^16.2.0",
     "webpack": "^3.10.0"
   },
   "dependencies": {

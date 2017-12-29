@@ -48,8 +48,10 @@ class ConfirmButton extends Component {
     }
 
     this.onConfirm = this.onConfirm.bind(this);
+    this.onConfirmClicked = this.onConfirmClicked.bind(this);
     this.onCancel = this.onCancel.bind(this);
   }
+  componentDidMount() {}
   onConfirm() {
     const confirm =
       typeof this.props.onConfirm === 'function'
@@ -70,15 +72,15 @@ class ConfirmButton extends Component {
     cancel();
     this.setState({ confirming: false });
   }
+  onConfirmClicked() {
+    this.setState({ confirming: true });
+  }
   renderButton() {
     if (!!this.props.once && this.state.clicked) return null;
     if (this.state.confirming) return null;
 
     return (
-      <button
-        className={this.buttonClassname}
-        onClick={() => this.setState({ confirming: true })}
-      >
+      <button className={this.buttonClassname} onClick={this.onConfirmClicked}>
         {this.props.buttonText || 'Save'}
       </button>
     );
