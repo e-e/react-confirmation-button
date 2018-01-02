@@ -19,6 +19,7 @@ import ConfirmButton from 'react-confirmation-button';
   confirmText="Confirm button text"
   cancelText="Cancel button text"
   loadingText="Loading button text (if `once` is set)"
+  wrapClass=""
   buttonClass=""
   confirmClass=""
   cancelClass=""
@@ -35,7 +36,8 @@ import ConfirmButton from 'react-confirmation-button';
    confirmText: 'Confirm',
    cancelText: 'Cancel',
    buttonText: 'Save',
-   loadingText: 'Loading'
+   loadingText: 'Loading',
+   wrapClass: '',
    buttonClass: '',
    confirmClass: '',
    cancelClass: '',

@@ -8,19 +8,27 @@ class ConfirmButton extends Component {
       clicked: false
     };
 
-    this.wrapAllClassname = '';
+    this.wrapClassname = '';
     this.buttonWrapClassname = '';
     this.buttonClassname = '';
     this.confirmClassname = '';
     this.cancelClassname = '';
     this.loadingClassname = '';
     if (
+      typeof this.props.wrapClass === 'string' &&
+      this.props.wrapClass.trim().length
+    ) {
+      this.wrapClassname = `${this.wrapClassname} ${
+        this.props.wrapClass
+      }`.trim();
+    }
+    if (
       typeof this.props.buttonClass === 'string' &&
       this.props.buttonClass.trim().length
     ) {
       this.buttonClassname = `${this.buttonClassname} ${
         this.props.buttonClass
-      }`;
+      }`.trim();
     }
     if (
       typeof this.props.confirmClass === 'string' &&
@@ -28,7 +36,7 @@ class ConfirmButton extends Component {
     ) {
       this.confirmClassname = `${this.confirmClassname} ${
         this.props.confirmClass
-      }`;
+      }`.trim();
     }
     if (
       typeof this.props.cancelClass === 'string' &&
@@ -36,7 +44,7 @@ class ConfirmButton extends Component {
     ) {
       this.cancelClassname = `${this.cancelClassname} ${
         this.props.cancelClass
-      }`;
+      }`.trim();
     }
     if (
       typeof this.props.loadingClass === 'string' &&
@@ -44,7 +52,7 @@ class ConfirmButton extends Component {
     ) {
       this.loadingClassname = `${this.loadingClassname} ${
         this.props.loadingClass
-      }`;
+      }`.trim();
     }
 
     this.onConfirm = this.onConfirm.bind(this);
@@ -89,16 +97,22 @@ class ConfirmButton extends Component {
     if (!!this.props.once && this.state.clicked) return null;
     if (!this.state.confirming) return null;
 
-    return (
-      <div className={this.buttonWrapClassname}>
-        <button className={this.confirmClassname} onClick={this.onConfirm}>
-          {this.props.confirmText || 'Confirm'}
-        </button>
-        <button className={this.cancelClassname} onClick={this.onCancel}>
-          {this.props.cancelText || 'Cancel'}
-        </button>
-      </div>
-    );
+    return [
+      <button
+        className={this.confirmClassname}
+        onClick={this.onConfirm}
+        key="confirm"
+      >
+        {this.props.confirmText || 'Confirm'}
+      </button>,
+      <button
+        className={this.cancelClassname}
+        onClick={this.onCancel}
+        key="cancel"
+      >
+        {this.props.cancelText || 'Cancel'}
+      </button>
+    ];
   }
 
   renderDisabled() {
@@ -113,7 +127,7 @@ class ConfirmButton extends Component {
   }
   render() {
     return (
-      <div className={this.wrapAllClassname}>
+      <div className={this.wrapClassname}>
         {this.renderButton()}
         {this.renderConfirm()}
         {this.renderDisabled()}

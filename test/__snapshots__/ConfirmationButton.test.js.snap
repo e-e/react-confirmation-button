@@ -17,21 +17,62 @@ exports[`renders correctly after clicking confirm 1`] = `
 <div
   className=""
 >
-  <div
+  <button
     className=""
+    onClick={[Function]}
   >
-    <button
-      className=""
-      onClick={[Function]}
-    >
-      Confirm
-    </button>
-    <button
-      className=""
-      onClick={[Function]}
-    >
-      Cancel
-    </button>
-  </div>
+    Confirm
+  </button>
+  <button
+    className=""
+    onClick={[Function]}
+  >
+    Cancel
+  </button>
+</div>
+`;
+
+exports[`renders correctly after clicking confirm with alt button text 1`] = `
+<div
+  className=""
+>
+  <button
+    className=""
+    onClick={[Function]}
+  >
+    Yes
+  </button>
+  <button
+    className=""
+    onClick={[Function]}
+  >
+    No
+  </button>
+</div>
+`;
+
+exports[`renders correctly with alt button text 1`] = `
+<div
+  className=""
+>
+  <button
+    className=""
+    onClick={[Function]}
+  >
+    Do something
+  </button>
+</div>
+`;
+
+exports[`renders correctly with provided classnames 1`] = `
+<div
+  className="wrap-class"
+>
+  <button
+    className="button-class"
+    onClick={[Function]}
+  >
+    Save
+  </button>
 </div>
 `;

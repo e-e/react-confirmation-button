@@ -17,3 +17,42 @@ it('renders correctly after clicking confirm', () => {
 
   expect(component.toJSON()).toMatchSnapshot();
 });
+
+it('renders correctly with provided classnames', () => {
+  const component = renderer.create(
+    <ConfirmationButton
+      onConfirm={() => {}}
+      wrapClass="wrap-class"
+      buttonClass="button-class"
+      confirmClass="confirm-class"
+      cancelClass="cancel-class"
+    />
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
+
+it('renders correctly with alt button text', () => {
+  const component = renderer.create(
+    <ConfirmationButton
+      onConfirm={() => {}}
+      confirmText="Yes"
+      buttonText="Do something"
+      cancelText="No"
+    />
+  );
+  expect(component.toJSON()).toMatchSnapshot();
+});
+
+it('renders correctly after clicking confirm with alt button text', () => {
+  const component = renderer.create(
+    <ConfirmationButton
+      onConfirm={() => {}}
+      confirmText="Yes"
+      buttonText="Do something"
+      cancelText="No"
+    />
+  );
+  component.getInstance().onConfirmClicked();
+
+  expect(component.toJSON()).toMatchSnapshot();
+});
