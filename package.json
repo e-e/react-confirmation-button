@@ -1,6 +1,6 @@
 {
   "name": "react-confirmation-button",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "Confirmation button functionality",
   "main": "build/index.js",
   "scripts": {
@@ -13,7 +13,11 @@
     "type": "git",
     "url": "git+https://github.com/e-e/react-confirmation-button.git"
   },
-  "keywords": ["React", "Confirmation", "Button"],
+  "keywords": [
+    "React",
+    "Confirmation",
+    "Button"
+  ],
   "author": {
     "name": "Eric Ellingson",
     "email": "god@eric.wtf"
