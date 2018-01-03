@@ -21,9 +21,11 @@ import ConfirmButton from 'react-confirmation-button';
   loadingText="Loading button text (if `once` is set)"
   wrapClass=""
   buttonClass=""
+  mainClass=""
   confirmClass=""
   cancelClass=""
   loadingClass=""
+  disabledClass=""
   once
 />;
 ```
@@ -39,9 +41,11 @@ import ConfirmButton from 'react-confirmation-button';
    loadingText: 'Loading',
    wrapClass: '',
    buttonClass: '',
+   mainClass
    confirmClass: '',
    cancelClass: '',
    loadingClass: '',
+   disabledClass: '',
    once: true
 }
 ```

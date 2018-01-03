@@ -101,28 +101,9 @@ var ConfirmButton = function (_Component) {
       confirming: false,
       clicked: false
     };
+    _this.allClassNames = ['wrapClass', 'buttonClass', 'mainClass', 'confirmClass', 'cancelClass', 'loadingClass', 'disabledClass'];
 
-    _this.wrapClassname = '';
-    _this.buttonWrapClassname = '';
-    _this.buttonClassname = '';
-    _this.confirmClassname = '';
-    _this.cancelClassname = '';
-    _this.loadingClassname = '';
-    if (typeof _this.props.wrapClass === 'string' && _this.props.wrapClass.trim().length) {
-      _this.wrapClassname = (_this.wrapClassname + ' ' + _this.props.wrapClass).trim();
-    }
-    if (typeof _this.props.buttonClass === 'string' && _this.props.buttonClass.trim().length) {
-      _this.buttonClassname = (_this.buttonClassname + ' ' + _this.props.buttonClass).trim();
-    }
-    if (typeof _this.props.confirmClass === 'string' && _this.props.confirmClass.trim().length) {
-      _this.confirmClassname = (_this.confirmClassname + ' ' + _this.props.confirmClass).trim();
-    }
-    if (typeof _this.props.cancelClass === 'string' && _this.props.cancelClass.trim().length) {
-      _this.cancelClassname = (_this.cancelClassname + ' ' + _this.props.cancelClass).trim();
-    }
-    if (typeof _this.props.loadingClass === 'string' && _this.props.loadingClass.trim().length) {
-      _this.loadingClassname = (_this.loadingClassname + ' ' + _this.props.loadingClass).trim();
-    }
+    _this.initClasses();
 
     _this.onConfirm = _this.onConfirm.bind(_this);
     _this.onConfirmClicked = _this.onConfirmClicked.bind(_this);
@@ -133,6 +114,25 @@ var ConfirmButton = function (_Component) {
   _createClass(ConfirmButton, [{
     key: 'componentDidMount',
     value: function componentDidMount() {}
+  }, {
+    key: 'initClasses',
+    value: function initClasses() {
+      var _this2 = this;
+
+      this.allClassNames.forEach(function (name) {
+        _this2[name] = '';
+        if (typeof _this2.props[name] === 'string' && _this2.props[name].trim().length) {
+          _this2[name] = (_this2[name] + ' ' + _this2.props[name]).trim();
+        }
+      });
+    }
+  }, {
+    key: 'outputClasses',
+    value: function outputClasses() {
+      return [].slice.call(arguments).reduce(function (classStr, className) {
+        return (classStr + ' ' + className).trim();
+      });
+    }
   }, {
     key: 'onConfirm',
     value: function onConfirm() {
@@ -162,7 +162,10 @@ var ConfirmButton = function (_Component) {
 
       return _react2.default.createElement(
         'button',
-        { className: this.buttonClassname, onClick: this.onConfirmClicked },
+        {
+          className: this.outputClasses(this.buttonClass, this.mainClass),
+          onClick: this.onConfirmClicked
+        },
         this.props.buttonText || 'Save'
       );
     }
@@ -175,7 +178,7 @@ var ConfirmButton = function (_Component) {
       return [_react2.default.createElement(
         'button',
         {
-          className: this.confirmClassname,
+          className: this.outputClasses(this.buttonClass, this.confirmClass),
           onClick: this.onConfirm,
           key: 'confirm'
         },
@@ -183,7 +186,7 @@ var ConfirmButton = function (_Component) {
       ), _react2.default.createElement(
         'button',
         {
-          className: this.cancelClassname,
+          className: this.outputClasses(this.buttonClass, this.cancelClass),
           onClick: this.onCancel,
           key: 'cancel'
         },
@@ -198,7 +201,10 @@ var ConfirmButton = function (_Component) {
       }
       return _react2.default.createElement(
         'button',
-        { className: '' + this.buttonClassname, disabled: true },
+        {
+          className: this.outputClasses(this.buttonClass, this.disabledClass),
+          disabled: true
+        },
         this.props.loadingText || 'Loading'
       );
     }
@@ -207,7 +213,7 @@ var ConfirmButton = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: this.wrapClassname },
+        { className: this.wrapClass },
         this.renderButton(),
         this.renderConfirm(),
         this.renderDisabled()
