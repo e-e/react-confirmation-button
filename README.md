@@ -1,5 +1,6 @@
 [![npm][npm]][npm-url]
 [![deps][deps]][deps-url]
+[![Build Status](https://travis-ci.org/e-e/react-confirmation-button.svg?branch=master)][build-url]
 
 ```bash
 npm install react-confirmation-button
@@ -54,3 +55,4 @@ import ConfirmButton from 'react-confirmation-button';
 [npm-url]: https://npmjs.com/package/react-confirmation-button
 [deps]: https://david-dm.org/e-e/react-confirmation-button.svg
 [deps-url]: https://david-dm.org/e-e/react-confirmation-button
+[build-url]: https://travis-ci.org/e-e/react-confirmation-button
